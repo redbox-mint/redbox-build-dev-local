@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.googlecode.redbox-mint</groupId>
+    <artifactId>redbox-local-curation-demo</artifactId>
+    <version>1.4-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>ReDBox - Local Curation Demo</name>
+    <parent>
+        <groupId>com.googlecode.redbox-mint</groupId>
+        <artifactId>redbox</artifactId>
+        <version>1.4-SNAPSHOT</version>
+    </parent>
+    <properties>
+        <!-- Used in build -->
+        <redbox.version>${project.version}</redbox.version>
+
+        <!-- Runtime values, will replace placeholders
+             in config and control scripts -->
+        <server.port>9000</server.port>
+        <amq.port>9101</amq.port>
+        <amq.stomp.port>9102</amq.stomp.port>
+        <server.url.base>http://${ip.address}:${server.port}/redbox/</server.url.base>
+        <mint.proxy.server>http://localhost:9001</mint.proxy.server>
+        <mint.amq.broker>tcp://localhost:9201</mint.amq.broker>
+        <dir.home>${project.home}/home</dir.home>
+        <dir.portal>${project.home}/portal</dir.portal>
+        <dir.server>${project.home}/server</dir.server>
+        <dir.solr>${project.home}/solr</dir.solr>
+        <dir.storage>${project.home}/storage</dir.storage>
+        <smtp.host>localhost</smtp.host>
+        <admin.email>admin@localhost</admin.email>
+        <!-- Control scripts try to auto-detect proxy. Use this value if you
+             want Java to specifically exclude certain hosts from proxying. -->
+        <non.proxy.hosts>localhost</non.proxy.hosts>
+    </properties>
+    <dependencies>
+        <!-- ReDBox Core - Will also draw in most other dependencies -->
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>redbox</artifactId>
+            <type>pom</type>
+            <version>${redbox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>redbox-config</artifactId>
+            <version>${redbox.version}</version>
+        </dependency>
+        <!-- Local Curation Plugin (from Mint) -->
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>plugin-transformer-local</artifactId>
+            <version>${redbox.version}</version>
+        </dependency>
+        <!-- Swap these 2 dependencies to go back to Fedora2 -->
+        <!--
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>redbox-vital-transformer-fedora2</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>redbox-vital-transformer-fedora3</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        -->
+    </dependencies>
+    <profiles>
+        <!--
+        <profile>
+            <id>novadev1</id>
+            <activation>
+                <property>
+                    <name>env.HOSTNAME</name>
+                    <value>novadev1</value>
+                </property>
+            </activation>
+            <properties>
+                <server.url.base>http://novadev1.newcastle.usq.edu.au/redbox/</server.url.base>
+                <mint.proxy.server>http://novadev1.newcastle.edu.au</mint.proxy.server>
+                <smtp.host>smtp.newcastle.edu.aut</smtp.host>
+                <admin.email>dave.huthnance@newcastle.edu.au</admin.email>
+            </properties>
+        </profile>
+        <profile>
+            <id>novadev2</id>
+            <activation>
+                <property>
+                    <name>env.HOSTNAME</name>
+                    <value>novadev2</value>
+                </property>
+            </activation>
+            <properties>
+                <server.url.base>http://novadev2.newcastle.usq.edu.au/redbox/</server.url.base>
+                <mint.proxy.server>http://novadev2.newcastle.edu.au</mint.proxy.server>
+                <smtp.host>smtp.newcastle.edu.aut</smtp.host>
+                <admin.email>dave.huthnance@newcastle.edu.au</admin.email>
+            </properties>
+        </profile>
+        -->
+        <profile>
+            <id>build-package</id>
+            <properties>
+                <server.url.base>http://localhost:${server.port}/redbox/</server.url.base>
+            </properties>
+
+            <!-- Used for creating an install - omits local build system settings -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>package.xml</descriptor>
+                                        <descriptor>externals.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <!-- The standard build/deploy process for making a server -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/config/home</directory>
+            </resource>
+            <resource>
+                <directory>src/main/config/portal</directory>
+            </resource>
+            <resource>
+                <directory>src/main/config/server</directory>
+            </resource>
+            <resource>
+                <directory>src/main/config/solr</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- 1st - Unpack Generic Mint setup -->
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <id>unpack-home</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <includes>home/**,portal/**,server/**,solr/**</includes>
+                            <outputDirectory>${project.home}</outputDirectory>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.googlecode.redbox-mint</groupId>
+                                    <artifactId>redbox-config</artifactId>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 2nd - Deploy Institutional build over default ReDBox -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <!-- Workaround bug MRESOURCES-104 -->
+                    <delimiters>
+                        <delimiter>${*}</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+                <executions>
+                    <!-- Configuration -->
+                    <execution>
+                        <id>copy-home</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${dir.home}</outputDirectory>
+                            <includeEmptyDirs>true</includeEmptyDirs>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <!-- Most config copied first as is -->
+                                <resource>
+                                    <directory>src/main/config/home</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <!-- Web portal -->
+                    <execution>
+                        <id>copy-portal</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${dir.portal}</outputDirectory>
+                            <includeEmptyDirs>true</includeEmptyDirs>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/config/portal</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <!-- Server files -->
+                    <execution>
+                        <id>copy-server</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${dir.server}</outputDirectory>
+                            <includeEmptyDirs>true</includeEmptyDirs>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/config/server</directory>
+                                    <filtering>false</filtering>
+                                    <excludes>
+                                        <exclude>**/*.bat</exclude>
+                                        <exclude>**/*.sh</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <!-- Control Scripts -->
+                    <execution>
+                        <id>copy-scripts</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${dir.server}</outputDirectory>
+                            <includeEmptyDirs>true</includeEmptyDirs>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <!-- Resolve some paths in our control scripts -->
+                                <resource>
+                                    <directory>src/main/config/server</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*.bat</include>
+                                        <include>**/*.sh</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <!-- Solr logging -->
+                    <execution>
+                        <id>copy-solr</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${dir.solr}</outputDirectory>
+                            <includeEmptyDirs>true</includeEmptyDirs>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/config/solr</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Set executable attribute for shell scripts -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <tasks>
+                                <chmod file="${dir.server}/*.sh" perm="740" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <url>https://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</url>
+        <connection>scm:svn:http://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</connection>
+        <developerConnection>scm:svn:https://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</developerConnection>
+    </scm>
+</project>
