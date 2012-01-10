@@ -53,53 +53,8 @@
             <artifactId>plugin-transformer-local</artifactId>
             <version>${redbox.version}</version>
         </dependency>
-        <!-- Swap these 2 dependencies to go back to Fedora2 -->
-        <!--
-        <dependency>
-            <groupId>com.googlecode.redbox-mint</groupId>
-            <artifactId>redbox-vital-transformer-fedora2</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.redbox-mint</groupId>
-            <artifactId>redbox-vital-transformer-fedora3</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        -->
     </dependencies>
     <profiles>
-        <!--
-        <profile>
-            <id>novadev1</id>
-            <activation>
-                <property>
-                    <name>env.HOSTNAME</name>
-                    <value>novadev1</value>
-                </property>
-            </activation>
-            <properties>
-                <server.url.base>http://novadev1.newcastle.usq.edu.au/redbox/</server.url.base>
-                <mint.proxy.server>http://novadev1.newcastle.edu.au</mint.proxy.server>
-                <smtp.host>smtp.newcastle.edu.aut</smtp.host>
-                <admin.email>dave.huthnance@newcastle.edu.au</admin.email>
-            </properties>
-        </profile>
-        <profile>
-            <id>novadev2</id>
-            <activation>
-                <property>
-                    <name>env.HOSTNAME</name>
-                    <value>novadev2</value>
-                </property>
-            </activation>
-            <properties>
-                <server.url.base>http://novadev2.newcastle.usq.edu.au/redbox/</server.url.base>
-                <mint.proxy.server>http://novadev2.newcastle.edu.au</mint.proxy.server>
-                <smtp.host>smtp.newcastle.edu.aut</smtp.host>
-                <admin.email>dave.huthnance@newcastle.edu.au</admin.email>
-            </properties>
-        </profile>
-        -->
         <profile>
             <id>build-package</id>
             <properties>
