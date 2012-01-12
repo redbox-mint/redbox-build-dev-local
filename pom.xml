@@ -13,7 +13,7 @@
     </parent>
     <properties>
         <!-- Used in build -->
-        <redbox.version>${project.version}</redbox.version>
+        <redbox.version>1.4</redbox.version>
 
         <!-- Runtime values, will replace placeholders
              in config and control scripts -->
