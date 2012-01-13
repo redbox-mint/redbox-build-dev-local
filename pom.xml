@@ -35,7 +35,15 @@
         <non.proxy.hosts>localhost</non.proxy.hosts>
     </properties>
     <dependencies>
-        <!-- ReDBox Core - Will also draw in most other dependencies -->
+        <!-- ReDBox Core - We want to explicitly define versions here because
+             ReDBox is listed as both a dependency and a parent. Some odd
+             consequences of using ${project.version} can result -->
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>redbox-project</artifactId>
+            <type>pom</type>
+            <version>${redbox.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.googlecode.redbox-mint</groupId>
             <artifactId>redbox</artifactId>
@@ -45,6 +53,16 @@
         <dependency>
             <groupId>com.googlecode.redbox-mint</groupId>
             <artifactId>redbox-config</artifactId>
+            <version>${redbox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>redbox-secure-api</artifactId>
+            <version>${redbox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.redbox-mint</groupId>
+            <artifactId>plugin-transaction-curation-redbox</artifactId>
             <version>${redbox.version}</version>
         </dependency>
         <!-- Local Curation Plugin (from Mint) -->
