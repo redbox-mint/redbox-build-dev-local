@@ -95,7 +95,6 @@
                                 <configuration>
                                     <descriptors>
                                         <descriptor>package.xml</descriptor>
-                                        <descriptor>externals.xml</descriptor>
                                     </descriptors>
                                 </configuration>
                             </execution>

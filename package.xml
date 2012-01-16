@@ -1,11 +1,12 @@
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
-  <id>project</id>
+  <id>build</id>
   <formats>
-    <format>zip</format>
+    <format>tar.gz</format>
   </formats>
   <fileSets>
+    <!-- nearly everything -->
     <fileSet>
       <directory>${basedir}/..</directory>
       <outputDirectory>redbox</outputDirectory>
@@ -16,8 +17,17 @@
         <include>server/**</include>
       </includes>
       <excludes>
-        <exclude>server/lib/**</exclude>
+        <exclude>server/*.sh</exclude>
       </excludes>
+    </fileSet>
+    <!-- control scripts -->
+    <fileSet>
+      <directory>${basedir}/..</directory>
+      <outputDirectory>mint</outputDirectory>
+      <includes>
+        <include>server/*.sh</include>
+      </includes>
+      <fileMode>740</fileMode>
     </fileSet>
   </fileSets>
   <includeBaseDirectory>false</includeBaseDirectory>
