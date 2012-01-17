@@ -23,7 +23,7 @@
     <!-- control scripts -->
     <fileSet>
       <directory>${basedir}/..</directory>
-      <outputDirectory>mint</outputDirectory>
+      <outputDirectory>redbox</outputDirectory>
       <includes>
         <include>server/*.sh</include>
       </includes>
