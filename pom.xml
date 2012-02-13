@@ -286,13 +286,15 @@
             </plugin>
         </plugins>
     </build>
-    <repository>
-        <id>sonatype-snapshots</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <scm>
         <url>https://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</url>
         <connection>scm:svn:http://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</connection>
