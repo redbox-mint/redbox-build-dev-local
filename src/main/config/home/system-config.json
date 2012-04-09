@@ -104,6 +104,15 @@
             }
         ]
     },
+    "andsDoi": {
+        "apiKey": "1234",
+        "apiBaseUrl": "https://test.ands.org.au/home/dois/",
+        "doiProperty": "andsDoi",
+        "security": {
+            "users": [],
+            "roles": ["admin"]
+        }
+    },
     "curation": {
         "curationEmailAddress": "${admin.email}",
         "curationRequiresConfirmation": false,
@@ -122,6 +131,11 @@
                 },
                 "system": "redbox",
                 "optional": true
+            },
+            "dc:relation.vivo:Service.0.dc:identifier": {
+                "path": ["dc:relation", "vivo:Service"],
+                "identifier": ["dc:identifier"],
+                "relationship": ["vivo:Relationship", "rdf:PlainLiteral"]
             },
             "dc:creator.foaf:Person.0.dc:identifier": {
                 "path": ["dc:creator", "foaf:Person"],
@@ -361,6 +375,7 @@
         "Funding_Bodies": "${mint.proxy.url}/Funding_Bodies/opensearch/lookup",
         "Parties_Groups": "${mint.proxy.url}/Parties_Groups/opensearch/lookup",
         "Parties_People": "${mint.proxy.url}/Parties_People/opensearch/lookup",
+        "Services": "${mint.proxy.url}/Services/opensearch/lookup",
         "Geonames": "${mint.proxy.server}/geonames/search"
     },
     "alerts": {
