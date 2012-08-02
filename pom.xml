@@ -3,17 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.googlecode.redbox-mint</groupId>
     <artifactId>redbox-local-curation-demo</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.5.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>ReDBox - Local Curation Demo</name>
     <parent>
         <groupId>com.googlecode.redbox-mint</groupId>
         <artifactId>redbox</artifactId>
-        <version>1.5</version>
+        <version>1.5.1-SNAPSHOT</version>
     </parent>
     <properties>
         <!-- Used in build -->
-        <redbox.version>1.5</redbox.version>
+        <redbox.version>1.5.1-SNAPSHOT</redbox.version>
 
         <!-- Runtime values, will replace placeholders
              in config and control scripts -->
@@ -286,15 +286,6 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <scm>
         <url>https://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</url>
         <connection>scm:svn:http://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</connection>
