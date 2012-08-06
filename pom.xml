@@ -291,4 +291,20 @@
         <connection>scm:svn:http://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</connection>
         <developerConnection>scm:svn:https://redbox-mint.googlecode.com/svn/redbox/builds/dev-local/trunk</developerConnection>
     </scm>
+    <repositories>
+        <repository>
+            <id>fascinator-snapshots</id>
+            <url>http://dev.redboxresearchdata.com.au/nexus/content/repositories/central-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>redbox-nexus</id>
+            <url>http://dev.redboxresearchdata.com.au/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 </project>
