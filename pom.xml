@@ -382,7 +382,7 @@
     </repository>
   </repositories>
   <scm>
-    <scmUrl>https://github.com/redbox-mint/redbox-build-dev-local</scmUrl>
+    <url>https://github.com/redbox-mint/redbox-build-dev-local</url>
     <developerConnection>scm:git:https://github.com/redbox-mint/redbox-build-dev-local.git</developerConnection>
   </scm>
 </project>
