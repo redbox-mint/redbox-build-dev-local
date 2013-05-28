@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.googlecode.redbox-mint</groupId>
   <artifactId>redbox-local-curation-demo</artifactId>
-  <version>1.6.1-SNAPSHOT</version>
+  <version>1.6.1</version>
   <packaging>${packaging}</packaging>
   <name>ReDBox - Local Curation Demo</name>
   <parent>
     <groupId>com.googlecode.redbox-mint</groupId>
     <artifactId>redbox</artifactId>
-    <version>1.6.1-SNAPSHOT</version>
+    <version>1.6.1</version>
   </parent>
   <properties>
     <!-- Used in build -->
@@ -44,34 +44,34 @@
       <groupId>com.googlecode.redbox-mint</groupId>
       <artifactId>redbox-project</artifactId>
       <type>pom</type>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.redbox-mint</groupId>
       <artifactId>redbox</artifactId>
       <type>pom</type>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.redbox-mint</groupId>
       <artifactId>redbox-config</artifactId>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.redbox-mint</groupId>
       <artifactId>redbox-secure-api</artifactId>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.redbox-mint</groupId>
       <artifactId>plugin-transaction-curation-redbox</artifactId>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <!-- Local Curation Plugin (from Mint) -->
     <dependency>
       <groupId>com.googlecode.redbox-mint</groupId>
       <artifactId>plugin-transformer-local</artifactId>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <!-- Clean up a dependency error raised during 1.6.1 redbox release -->
     <dependency>
