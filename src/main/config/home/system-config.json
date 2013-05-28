@@ -600,7 +600,7 @@
                 "baseline": {
                     "viewId": "dashboard",
                     "packageType": "dmpt",
-                    "redbox:formVersion": "${redbox.version}",
+                    "redbox:formVersion": "1.6.1-SNAPSHOT",
                     "redbox:newForm": true,
                     "redbox:submissionProcess.redbox:submitted": true,
                     "workflow_source": "Default Alert"
