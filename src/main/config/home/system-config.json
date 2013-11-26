@@ -377,6 +377,7 @@
         "contentDir": "${fascinator.home}/content",
         "defaultView": "default",
         "sessionTimeout": "60",
+        "displayPrintLinks": "true",
         "skins": {
             "default": "default",
             "order": [

@@ -3,17 +3,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.googlecode.redbox-mint</groupId>
   <artifactId>redbox-local-curation-demo</artifactId>
-  <version>1.6.3-SNAPSHOT</version>
+  <version>1.7-SNAPSHOT</version>
   <packaging>${packaging}</packaging>
   <name>ReDBox - Local Curation Demo</name>
   <parent>
     <groupId>com.googlecode.redbox-mint</groupId>
     <artifactId>redbox</artifactId>
-    <version>1.6.2</version>
+    <version>1.7-SNAPSHOT</version>
   </parent>
   <properties>
     <!-- Used in build -->
-    <redbox.version>1.6.2-SNAPSHOT</redbox.version>
+    <redbox.version>1.7-SNAPSHOT</redbox.version>
     <package.finalname>${project.build.finalName}</package.finalname>
     <!-- Runtime values, will replace placeholders in config and control scripts -->
     <app.location.windows>${project.home}</app.location.windows>
@@ -37,49 +37,64 @@
     <non.proxy.hosts>localhost</non.proxy.hosts>
   </properties>
   <dependencies>
-    <!-- ReDBox Core - We want to explicitly define versions here because ReDBox 
+   <!-- ReDBox Core - We want to explicitly define versions here because ReDBox 
 			is listed as both a dependency and a parent. Some odd consequences of using 
 			${project.version} can result -->
-    <dependency>
-      <groupId>com.googlecode.redbox-mint</groupId>
-      <artifactId>redbox-project</artifactId>
-      <type>pom</type>
-      <version>1.6.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.redbox-mint</groupId>
-      <artifactId>redbox</artifactId>
-      <type>pom</type>
-      <version>1.6.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.redbox-mint</groupId>
-      <artifactId>redbox-config</artifactId>
-      <version>1.6.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.redbox-mint</groupId>
-      <artifactId>redbox-secure-api</artifactId>
-      <version>1.6.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.redbox-mint</groupId>
-      <artifactId>plugin-transaction-curation-redbox</artifactId>
-      <version>1.6.2</version>
-    </dependency>
-    <!-- Local Curation Plugin (from Mint) -->
-    <dependency>
-      <groupId>com.googlecode.redbox-mint</groupId>
-      <artifactId>plugin-transformer-local</artifactId>
-      <version>1.6.2</version>
-    </dependency>
-    <!-- Clean up a dependency error raised during 1.6.1 redbox release -->
-    <dependency>
-          <groupId>com.googlecode.the-fascinator</groupId>
-          <artifactId>fascinator-portal</artifactId>
-          <type>warpath</type>
-          <version>1.1.5</version>
-        </dependency>
+		<dependency>
+			<groupId>com.googlecode.redbox-mint</groupId>
+			<artifactId>redbox-project</artifactId>
+			<type>pom</type>
+			<version>1.7-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.redbox-mint</groupId>
+			<artifactId>redbox</artifactId>
+			<type>pom</type>
+			<version>1.7-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.redbox-mint</groupId>
+			<artifactId>redbox-config</artifactId>
+			<version>1.7-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.redbox-mint</groupId>
+			<artifactId>redbox-secure-api</artifactId>
+			<version>1.7-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.redbox-mint</groupId>
+			<artifactId>plugin-transaction-curation-redbox</artifactId>
+			<version>1.7-SNAPSHOT</version>
+		</dependency>
+		<!-- Local Curation Plugin (from Mint) -->
+		<dependency>
+			<groupId>com.googlecode.redbox-mint</groupId>
+			<artifactId>plugin-transformer-local</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.the-fascinator.plugins</groupId>
+			<artifactId>plugin-transformer-basicVersioning</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- new velocity plugins -->
+		<dependency>
+			<groupId>com.googlecode.the-fascinator.plugins</groupId>
+			<artifactId>plugin-transformer-jsonVelocity</artifactId>
+			<version>1.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.the-fascinator.plugins</groupId>
+			<artifactId>plugin-transformer-jsonVelocity-pdf</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- JSON harvester plugin -->
+		<dependency>
+			<groupId>au.com.redboxresearchdata.fascinator</groupId>
+			<artifactId>plugin-harvester-json</artifactId>
+			<version>1.1.5-SNAPSHOT</version>
+		</dependency>
   </dependencies>
   <profiles>
     <profile>
