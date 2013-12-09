@@ -93,8 +93,8 @@
 		<dependency>
 			<groupId>au.com.redboxresearchdata.fascinator</groupId>
 			<artifactId>plugin-harvester-json</artifactId>
-			<version>1.1.5-SNAPSHOT</version>
-		</dependency>
+			<version>1.2-SNAPSHOT</version>
+		</dependency>		
   </dependencies>
   <profiles>
     <profile>

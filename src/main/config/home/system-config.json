@@ -125,6 +125,14 @@
                         "body": "Default email message"
                     }
                 }
+            },
+            {
+                "id": "jsonHarvester",
+                "description": "Harvester queue for incoming JSON objects.",
+                "priority": "7",
+                "config": {
+                    "name": "jsonHarvester"
+                }
             }
         ]
     },
@@ -340,7 +348,13 @@
             "TFMETAPropertyValue": "true",
             "clearPropertyOnTransform": "true",
             "transformSource": "true"
-        }
+        },"basicVersioning": {
+		    "id": "extensionBasicVersioning",
+		    "sourcePayload": ".tfpackage"
+		},"extensionBasicVersioning": {
+		    "id": "extensionBasicVersioning",
+		    "sourcePayload": ".tfpackage.parked"
+		}
     },
     "uploader": {
         "attachment-upload": {
